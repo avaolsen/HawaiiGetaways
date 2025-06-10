@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hawaii Fun Facts Game</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>🌺 Hawaii Fun Facts Quiz 🌴</h1>
+        <div id="quiz-box">
+            <p id="question">Loading...</p>
+            <div id="choices"></div>
+            <button id="next-button" disabled>Next</button>
+            <p id="score"></p>
+        </div>
+        <a href="/" class="home-link">⬅️ Back to Home</a>
+    </div>
+
+    <script>
+        const quizData = [{
+            question: "What is the capital of Hawaii?",
+            choices: ["Hilo", "Maui", "Honolulu", "Kauai"],
+            answer: "Honolulu"
+        }, {
+            question: "Which U.S. state is farthest south?",
+            choices: ["Florida", "Texas", "California", "Hawaii"],
+            answer: "Hawaii"
+        }, {
+            question: "What is Hawaii's state flower?",
+            choices: ["Plumeria", "Hibiscus", "Orchid", "Bird of Paradise"],
+            answer: "Hibiscus"
+        }, {
+            question: "How many main islands make up Hawaii?",
+            choices: ["5", "7", "8", "10"],
+            answer: "8"
+        }, {
+            question: "What traditional Hawaiian food is made from taro root?",
+            choices: ["Poi", "Lomi Salmon", "Kalua Pig", "Poke"],
+            answer: "Poi"
+        }];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        const questionEl = document.getElementById("question");
+        const choicesEl = document.getElementById("choices");
+        const nextButton = document.getElementById("next-button");
+        const scoreEl = document.getElementById("score");
+
+        function loadQuestion() {
+            const q = quizData[currentQuestion];
+            questionEl.textContent = q.question;
+            choicesEl.innerHTML = "";
+            nextButton.disabled = true;
+            q.choices.forEach(choice => {
+                const btn = document.createElement("button");
+                btn.classList.add("choice-btn");
+                btn.textContent = choice;
+                btn.onclick = () => selectAnswer(btn, q.answer);
+                choicesEl.appendChild(btn);
+            });
+        }
+
+        function selectAnswer(button, correctAnswer) {
+            const buttons = document.querySelectorAll(".choice-btn");
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent === correctAnswer) {
+                    btn.classList.add("correct");
+                } else if (btn === button) {
+                    btn.classList.add("wrong");
+                }
+            });
+
+            if (button.textContent === correctAnswer) {
+                score++;
+            }
+
+            nextButton.disabled = false;
+        }
+
+        nextButton.onclick = () => {
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        };
+
+        function showScore() {
+            questionEl.textContent = "Quiz complete!";
+            choicesEl.innerHTML = "";
+            nextButton.style.display = "none";
+            scoreEl.textContent = `You got ${score} out of ${quizData.length} correct.`;
+        }
+
+        loadQuestion();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: blanchedalmond;
+    /* text-align: center; */
+    align-content: center;
+    color: cornflowerblue;
+}
+
+.alignthings {
+    text-align: center;
+}
+
+
+/* .liststyle {
+    text-align: center;
+    list-style-position: inside;
+} */
+
+.mylist {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mylist ul {
+    margin: 0 auto;
+    display: table;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0px;
+    height: 50px;
+    right: 0px;
+    left: 0px;
+    background-color: blanchedalmond;
+}
+
+.tableau-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    width: 100%;
+}
+
+.tableauPlaceholder {
+    max-width: 100%;
+}
+
+.myimage {
+    position: absolute;
+    left: 60px;
+    top: 80px;
+}
